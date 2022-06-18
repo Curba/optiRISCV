@@ -268,7 +268,7 @@ def Jtype(instr, mode, counter):
     else:
         return "Invalid opcode definition"
 
-    if instr[1][:2] == "0x" and int(instr[1][2:], 16) <= 67108863:
+    if instr[1][:2] == "0x":
         addr = binary_repr(int(instr[1], 16), width=19)
     else:
         try:
@@ -282,9 +282,10 @@ def Jtype(instr, mode, counter):
                 return "In interactive mode enter hex or decimal"
             elif mode == "1":
                 if instr[1].strip() in labelDict.keys():
+                    print("Debug")
                     #EVALUATE THIS
-                    addr = binary_repr(labelDict[instr[1].strip()] + 4, width=32)[13:32]
-                    #print("address jum:" + addr)
+                    addr = binary_repr(labelDict[instr[1].strip()] , width=32)[13:32]
+                    print("address jum:" + addr)
                 else:
                     return "Jump location not defined in line:" + counter
 
@@ -348,10 +349,10 @@ def Itype(instr, mode, counter):
         try:
             instr[3] = instr[3].strip()
             #print("demo " + instr[3])
-            #print(labelDict)
+            print(labelDict)
             if instr[3][:2] == "0x" and int(instr[3][2:], 16) <= 65534:
                 addr = binary_repr(int(instr[3], 16), width=14)
-                #print("address branch:" + addr)
+                print("address branch:" + addr)
             else:
                 try:
                     instr[3] = int(instr[3])
@@ -363,13 +364,19 @@ def Itype(instr, mode, counter):
                     if mode == "2":
                         return "In interactive mode enter hex or decimal"
                     elif mode == "1":
+                        print("yes: " + instr[3].strip())
+                        #print("guys: " + labelDict['lbl1'])
                         if instr[3].strip() in labelDict.keys():
                             print("its in")
                             instrLocation = counter * 4
                             branchAddr = int(labelDict[instr[3].strip()])
                             branchDistance = branchAddr - instrLocation
                             addr = binary_repr(int(branchAddr+4), width=32)[18:32]
-                            #print(addr)
+                            #addr = binary_repr(int(branchDistance), width=32)[14:30]
+                      #      print("instr loc: " + instrLocation)
+                      #      print("branch addr: " + branchAddr)
+                      #      print("address branchh:" + addr)
+                            print(addr)
                             return constructHex(rd + ra + addr + opcode, mode)
                         else:
                             return "Branch location not defined in line:" + str(counter)
@@ -425,7 +432,7 @@ if __name__ == "__main__":
     while a != "q":
         mode = input("Enter 1 for batch 2 for interact1ive mode \n")
         if mode == "1":
-            programPath = "program.src"
+            programPath = "sorter.src"
             f = open(programPath, "r")
             programFile = f.readlines()
             results = open("output.obj", "w")
@@ -441,7 +448,6 @@ if __name__ == "__main__":
                     counter += 1
                     results.writelines(str(builder(x, mode, counter)) + "\n")
                 print("File is written")
-                a = "q"
             except:
                 print("Error occured program terminated")
                 a = input("Press 'q' to quit or press 's' to select mode again \n")
@@ -453,6 +459,6 @@ if __name__ == "__main__":
                     print(builder(instruction, mode, "0") + "\n")
                     a = input("Press 'q' to quit or press 's' to select mode again \n")
                 except TypeError:
-                    print("Error occured program terminated")
+                    print("AAAError occured program terminated")
         else:
             print("Invalid  mode number!!\n", "Try 1 or 2")
