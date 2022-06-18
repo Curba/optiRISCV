@@ -371,7 +371,7 @@ def Itype(instr, mode, counter):
                             instrLocation = counter * 4
                             branchAddr = int(labelDict[instr[3].strip()])
                             branchDistance = branchAddr - instrLocation
-                            addr = binary_repr(int(branchAddr+4), width=32)[18:32]
+                            addr = binary_repr(int(branchAddr), width=32)[18:32]
                             #addr = binary_repr(int(branchDistance), width=32)[14:30]
                       #      print("instr loc: " + instrLocation)
                       #      print("branch addr: " + branchAddr)
@@ -432,7 +432,7 @@ if __name__ == "__main__":
     while a != "q":
         mode = input("Enter 1 for batch 2 for interact1ive mode \n")
         if mode == "1":
-            programPath = "sorter.src"
+            programPath = "iaxpy.src"
             f = open(programPath, "r")
             programFile = f.readlines()
             results = open("output.obj", "w")
@@ -448,6 +448,7 @@ if __name__ == "__main__":
                     counter += 1
                     results.writelines(str(builder(x, mode, counter)) + "\n")
                 print("File is written")
+                a = "q"
             except:
                 print("Error occured program terminated")
                 a = input("Press 'q' to quit or press 's' to select mode again \n")
