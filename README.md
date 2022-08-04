@@ -1,9 +1,9 @@
-# optiMIPS - Mips-Assembler
-Basic assembler for MIPS ISA.
+# optiRISCV - Papatya ISA Assembler
+Basic assembler for Papatya ISA. (Advice you to check the CPU that the ISA is published for.)
 
 Build for Computer Architecture Course in METU NCC by Electrical and Electronics Engineering students.
 
-It doesn't have all of the MIPS ISA but new instructions can be implemented easly.
+It is fork from optiMIPS MIPS assembler updated for custom Papatya ISA that is inspired by RISCV set. 
 
 Follow comments inside the assemblr.py for adding new instructions.
 
@@ -23,6 +23,5 @@ Build in Ubuntu 20.04.
 
 Python version 3.8.5
 
-Wouldn't advise you to use it if you are from METU NCC.
 </pre>
 
