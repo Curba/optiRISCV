@@ -11,11 +11,11 @@ Follow comments inside the assemblr.py for adding new instructions.
 
 There are two modes: Batch and Interactive.
 
-In interactive mode user can write one line of MIPS code and convert it to hex.
+In interactive mode user can write one line of code and convert it to hex.
 
 In batch mode user can convert file full of instructins to hex.
 
-To use batch mode add a file called program.src in the same directory that contains MIPS code and the program.
+To use batch mode add a file called program.src in the same directory that contains multiline code.
 
 Example program.src and output file is added.
 <pre>
